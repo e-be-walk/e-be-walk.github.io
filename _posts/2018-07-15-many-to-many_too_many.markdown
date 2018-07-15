@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_07_15_020021) do
     t.datetime "updated_at", null: false
   end 
 
-	 create_table "books", force: :cascade do |t|
+ create_table "books", force: :cascade do |t|
    	t.string "title"
       t.integer "author_id"
       t.integer "publisher_id"
@@ -57,10 +57,10 @@ ActiveRecord::Schema.define(version: 2018_07_15_020021) do
       t.datetime "updated_at", null: false
  	 end 
 
-	 create_table "publisher", force: :cascade do |t|
+	create_table "publisher", force: :cascade do |t|
    	t.string "name"
       t.integer "book_id"
-  	    t.datetime "created_at", null: false
+  	  t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
  	 end 
 ```
