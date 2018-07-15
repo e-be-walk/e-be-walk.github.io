@@ -20,12 +20,12 @@ It’s not the prettiest chart, but having it drawn up at least helps to make a 
 ```
 class CreateBooks < ActiveRecord::Migration[5.2]
   def change
-    create_table :books do |t|
-      t.string :title
-		  t.integer :author_id
-		  t.integer :publisher_id
-      t.timestamps
-    end
+   create_table :books do |t|
+		t.string :title
+		t.integer :author_id
+		t.integer :publisher_id
+		t.timestamps
+   end
   end
 end
 ```
@@ -41,28 +41,28 @@ ActiveRecord::Schema.define(version: 2018_07_15_020021) do
     t.datetime "updated_at", null: false
   end 
 
- create_table "books", force: :cascade do |t|
-   	t.string "title"
-      t.integer "author_id"
-      t.integer "publisher_id"
-  	  t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
- 	 end 
+create_table "books", force: :cascade do |t|
+   t.string "title"
+   t.integer "author_id"
+   t.integer "publisher_id"
+   t.datetime "created_at", null: false
+   t.datetime "updated_at", null: false
+end 
 
-	 create_table "chapters", force: :cascade do |t|
-   	t.string "title"
-      t.integer "author_id"
-      t.integer "book_id"
-  	  t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
- 	 end 
+create_table "chapters", force: :cascade do |t|
+   t.string "title"
+	 t.integer "author_id"
+	 t.integer "book_id"
+	 t.datetime "created_at", null: false
+	 t.datetime "updated_at", null: false
+end 
 
-	create_table "publisher", force: :cascade do |t|
-   	t.string "name"
-      t.integer "book_id"
-  	  t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
- 	 end 
+create_table "publisher", force: :cascade do |t|
+  t.string "name"
+  t.integer "book_id"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end 
 ```
 
 Now for the final part before you can start working on your controller and your views: Models. We have to declare the relationship within our models too. The models would look something like this:
@@ -86,7 +86,7 @@ class Chapter < ApplicationRecord
 end 
 
 class Publisher < ApplicationRecord 
-	belongs to :book
+  belongs to :book
 	belongs_to :author
 end 
 ```
