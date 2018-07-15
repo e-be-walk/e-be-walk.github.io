@@ -6,9 +6,9 @@ permalink:  many-to-many_too_many
 ---
 
 
-It’s not hard to visualize and demonstrate most model relationships. Most relationships can be easily visualized with books. For instance, `belongs_to` and `has_many` is easy- an author has_many books and a book belongs to an author. Let’s say a book is published- chances are, the book only `has_one` publisher, right? These relationships can be easily defined with a foreign key in the corresponding table- in this case, a book would have a foreign key for to identify the author and an additional foreign key to identify the publisher.
+It’s not hard to visualize and demonstrate most model relationships. Most relationships can be easily visualized with books. For instance, `belongs_to` and `has_many` is easy- an author `has_many` books and a book `belongs_to` an author. Let’s say a book is published- chances are, the book only `has_one` publisher, right? These relationships can be easily defined with a foreign key in the corresponding table- in this case, a book would have a foreign key to identify the author and an additional foreign key to identify the publisher.
 
-Establishing and visualizing a many-to-many relationship is a little bit tougher. The `has_many_through` relationship gets a little abstract and it can not only be harder to identify these relationships but also to implement ensuring that your table has a correct key. So what is a many-to-many relationship? In trying to figure one out that applies to books, I had to meander a little bit and think outside the box. We’ve got this sculpture at work which demonstrates it quite well- one sculpture, `has_many` alligator heads, and many alligator heads `has_many` teeth. Many teeth `belongs_to` one alligator and many alligators `belongs_to`  one sculpture. Many teeth! Many alligator heads! ONE sculpture.
+Establishing and visualizing a many-to-many relationship is a little bit tougher. The `has_many_through` relationship gets a little abstract and it can not only be harder to identify these relationships but also to implement ensuring that your table has correct keys and relationships. So what is a many-to-many relationship? In trying to figure one out that applies to books, I had to meander a little bit and think outside the box. We’ve got this sculpture at work which demonstrates it quite well- one sculpture, `has_many` alligator heads, and many alligator heads `has_many` teeth. Many teeth `belongs_to` one alligator and many alligators `belongs_to`  one sculpture. Many teeth! Many alligator heads! ONE sculpture.
 
 ![Many teeth! Many alligator heads! ONE sculpture.](https://imgur.com/hnJNbU1.jpg)
 
@@ -21,10 +21,10 @@ It’s not the prettiest chart, but having it drawn up at least helps to make a 
 class CreateBooks < ActiveRecord::Migration[5.2]
   def change
     create_table :books do |t|
-        t.string :title
+      t.string :title
 		  t.integer :author_id
 		  t.integer :publisher_id
-        t.timestamps
+      t.timestamps
     end
   end
 end
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2018_07_15_020021) do
    	t.string "title"
       t.integer "author_id"
       t.integer "publisher_id"
-  	    t.datetime "created_at", null: false
+  	  t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
  	 end 
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2018_07_15_020021) do
    	t.string "title"
       t.integer "author_id"
       t.integer "book_id"
-  	    t.datetime "created_at", null: false
+  	  t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
  	 end 
 
