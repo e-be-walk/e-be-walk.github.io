@@ -10,11 +10,11 @@ It’s not hard to visualize and demonstrate most model relationships. Most rela
 
 Establishing and visualizing a many-to-many relationship is a little bit tougher. The `has_many_through` relationship gets a little abstract and it can not only be harder to identify these relationships but also to implement ensuring that your table has a correct key. So what is a many-to-many relationship? In trying to figure one out that applies to books, I had to meander a little bit and think outside the box. We’ve got this sculpture at work which demonstrates it quite well- one sculpture, `has_many` alligator heads, and many alligator heads `has_many` teeth. Many teeth `belongs_to` one alligator and many alligators `belongs_to`  one sculpture. Many teeth! Many alligator heads! ONE sculpture.
 
-![Many teeth! Many alligator heads! ONE sculpture.](https://imgur.com/ymKJYkx)
+![Many teeth! Many alligator heads! ONE sculpture.](https://imgur.com/hnJNbU1.jpg)
 
 So going back to our books, it could be said that an author has many chapters through their books. And just to be safe, let’s assume we’re talking about a prolific author- like Stephen King or Tolstoy or something- not a one hit wonder like J.D. Salinger. So one author `has_many` books, the author also `has_many` chapters `through` each of their books. So far, so good, right? If we were to map this out, it would look something like this: 
 
-![Mapping out the relationships](https://imgur.com/xQoD06F)
+![Mapping out the relationships](https://imgur.com/xQoD06F.jpg)
 
 It’s not the prettiest chart, but having it drawn up at least helps to make a bit of sense of this. So how would you go about setting this up in your rails application? We need to create our migrations! Run `rake db:migration CreateTableName` for each one, ensuring to include your foreign keys as columns. 
 ```
