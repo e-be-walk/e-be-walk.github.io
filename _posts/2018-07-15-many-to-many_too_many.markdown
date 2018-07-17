@@ -70,7 +70,7 @@ Now for the final part before you can start working on your controller and your 
 ```
 class Author < ApplicationRecord
   has_many :books
-	has_many :chapters, through: books
+	has_many :chapters, through: :books
 	has_one :publisher, through: :book
 end 
 
@@ -91,4 +91,55 @@ class Publisher < ApplicationRecord
 end 
 ```
 
-With that, you’ll be able to start working on all the CRUD driving the controller actions and views enabling an author to add their books, chapters, and and publisher. As always, check out the [docs](http://guides.rubyonrails.org/association_basics.html) for more information.
+Let's say that you're no Stephen King but instead, a forward looking writer who wants to use the internet as a place for your thoughts via blogging and you want a way for authors using your blog to give and receive feedback about your writing. There is an additional many-to-many relationship that can be implemented to accomplish this. Let's start by mapping out that relationship. 
+
+![Bidirectional has_many_through relationship](https://imgur.com/F6054XB.jpg)
+
+So looking at this chart, we have an author, a blog, and finally comments. An author can `has_many` comments and a blog can `has_many` comments too. This enables an author to make comments on any blog s/he wants and for the relationship with that blog to be conveyed through the comments which serves as the join table. Essentially this means that an author `has_many :blogs through: :comments` and a blog `has_many :authors through: :comments`. For this relationship, your migrations are set up in much the same way, but you must ensure that your comments- or whatever is serving as the join- has not only it's own id, but a foreign key for both models it belongs_to. Your schema might look something like this:
+```
+ActiveRecord::Schema.define(version: 2018_07_15_020021) do
+
+  create_table "author", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end 
+
+create_table "blog", force: :cascade do |t|
+   t.string "title"
+   t.datetime "created_at", null: false
+   t.datetime "updated_at", null: false
+end 
+
+create_table "comments", force: :cascade do |t|
+   t.string "comment_text"
+	 t.integer "author_id"
+	 t.integer "blog_id"
+	 t.datetime "created_at", null: false
+	 t.datetime "updated_at", null: false
+end 
+```
+
+And to be thorough, let's break this down in our models:
+
+```
+class Author < ApplicationRecord
+  has_many :comments
+	has_many :blogs, through: :comments
+end 
+
+class Blog < ApplicationRecord
+	has_many :comments
+	has_many :authors, through: :comments
+end 
+
+class Comments < ApplicationRecord
+	belongs_to :blog
+	belongs_to :author
+end 
+```
+
+Now this is a relationship that I feel is less common and practical in the way of real-life examples and applications you would use it in. Maybe some day after you've learned ALOT more dev, you are managing a bank's website- this `has_many` relationship could apply to the bank- an account serving as the join between the banking institution and the banking institution `has_many` users through their accounts. The docs (link below) include the example of appointments serving as a join between physicians and patients. Another example could be a work-out routine whereby the exercises serve as the join and belong to a user and a routine- the user `has_many` routines and `has_many` individual exercises through those routines which woud mean that a routine `has_many` exercises and `has_many` users through their exercises. Admittedly, I found illustrating practical examples for this type of `many_to_many` association a bit more difficult.  
+
+
+ If you're still struggling with associations, check out the [docs](http://guides.rubyonrails.org/association_basics.html) for more information.
