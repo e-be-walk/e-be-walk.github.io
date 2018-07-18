@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "How to Style Your learn.co Blog"
-date:       2018-07-18 02:20:05 +0000
+date:       2018-07-17 22:20:06 -0400
 permalink:  how_to_style_your_learn_co_blog
 ---
 
@@ -24,17 +24,13 @@ You can easily change the heading images for your about page. Simply copy whatev
 
 ![about page image](https://imgur.com/1BjjZ8f.jpg)
 
-One other quick fix I applied was to the fonts within the css. You can always go to [Google Fonts](https://fonts.google.com/) to pick your own font-families. I chose a fun decorative text for my headings and larger text complementing it with simpler, cleaner fonts for larger bodies of text. You'll want to `@import` your font files to your `/layouts/default.html` between script tags:
+One other quick fix I applied was to the fonts within the css. You can always go to [Google Fonts](https://fonts.google.com/) to pick your own font-families. I chose a fun decorative text for my headings and larger text complementing it with simpler, cleaner fonts for larger bodies of text. You'll want to include your font files to your `/_includes/head.html` file where it is noted that custom fonts go. It pops up around line 21 and it should look something like this:
 ```
-<!DOCTYPE html>
-<html lang="en">
+...
 
-{% include head.html %}
-<style>
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Raleway|Trocchi');
-</style>
-<body>
-
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Raleway|Trocchi" rel="stylesheet" type='text/css'>
+		
 ... 
 
 ``` 
