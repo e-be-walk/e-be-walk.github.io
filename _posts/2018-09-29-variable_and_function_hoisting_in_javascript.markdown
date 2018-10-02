@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Variable and Function Hoisting in JavaScript"
-date:       2018-09-29 23:07:25 +0000
+date:       2018-09-29 19:07:26 -0400
 permalink:  variable_and_function_hoisting_in_javascript
 ---
 
@@ -12,7 +12,7 @@ It’s important to understand how hoisting can affect scope. There's two parts 
 
 Notice that the first `console.log(salary);` doesn’t throw and error- it returns `undefined`. This means that the JavaScript engine found the `var salary` declared below but during this first console.log did not yet have the value of that variable. It’s been hoisted to the top. This powerful behavior can lead to bugs in our code if we’re not careful about how we declare variables.
 
-If we use `let` or `const` instead of `var` within this example, the behavior for this example is essentially the same- the JavaScript Engine sees the declaration but does not know the value returning `undefined` for the first console.log. It is important to remember that `const` declarations cannot be reassigned and must be declared at the time they are initialized. Otherwise, in this particular example we’re not operating on the data and all three behavior relatively the same. It gets a bit more complicated when we throw functions into the mix. 
+If we use `let` or `const` instead of `var` within this example, the console will return an error and terminate all further execution. If you are using babel the behavior for let or const in this example, the behavior for this example is essentially the same- the JavaScript Engine sees the declaration but does not know the value returning `undefined` for the first console.log. It is important to remember that `const` declarations cannot be reassigned and must be declared at the time they are initialized. Otherwise, in this particular example we’re not operating on the data and all three behavior relatively the same. It gets a bit more complicated when we throw functions into the mix. 
 
 ## Block level scoping
 Block-level scoping helps to provide more control over a variable’s lifecycle. Block-level declarations were introduced with ES6 and are made within a `{ }` block. We’re going to demonstrate block-level declarations using `let` and `const` to see how that affects the availability of the variable. 
@@ -54,7 +54,7 @@ Crazy, right? Now it knows that we are adjusting the value of the `var` in the g
 
 Now this is also a function expression- we are assigning the `var hoisting` a function definition. Remember- we can’t execute a function expression before it is defined: 
  
- ![](https://imgur.com/ky1vlgT.jpg)
+ ![](https://imgur.com/5R9O67O.jpg)
 
 If we change it to a function declaration though…
 
